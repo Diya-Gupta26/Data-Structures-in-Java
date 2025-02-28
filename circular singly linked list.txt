@@ -1,0 +1,141 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+
+class Node {
+	int value;
+	Node next;
+
+	Node(int num) {
+		value=num;
+		next=null;
+	}
+}
+
+class CSLL
+{
+	Node head;
+	Node tail;
+
+	CSLL() {
+		head=tail=null;
+	}
+
+
+
+	void insertAtHead(int num) {
+		Node n1=new Node(num);
+
+		if(head==null)
+			head=tail=n1;
+
+		else {
+			n1.next=head;
+			head=n1;
+		}
+		tail.next=head;
+	}
+
+	void insertAtTail(int num) {
+		Node n1=new Node(num);
+
+		if(head==null)
+			head=tail=n1;
+
+		else {
+			tail.next=n1;
+			tail=n1;
+		}
+		tail.next=head;
+	}
+
+	void traverse() {
+		Node temp=head;
+
+		if(head==null)
+			return;
+
+		while(temp.next!=head) {
+			System.out.println(temp.value);
+			temp=temp.next;
+		}
+
+		System.out.println(temp.value);
+	}
+
+	void deleteAtHead() {
+		Node temp=head;
+
+		if(head==null)
+			return;
+
+		else if(head==tail) {
+			head=tail=null;
+		}
+
+		else {
+			head=head.next;
+		}
+		tail.next=head;
+	}
+	void deleteAtTail() {
+		Node temp=head;
+
+		if(head==null)
+			return;
+
+		else if(head==tail) {
+			head=tail=null;
+		}
+
+		else {
+			while(temp.next!=tail) {
+				temp=temp.next;
+				
+		}
+			tail=temp;
+			tail.next=head;
+		}
+	
+	}
+	boolean search(int num)
+	{
+	    Node temp=head;
+	    if(head==null)
+	    return false;
+	    
+	    else{
+	        while(temp!=tail)
+	        {
+	            if(temp.value==num)
+	            return true;
+	            
+	            temp=temp.next;
+	        }
+	        return false;
+	    }
+	    }
+
+
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+		CSLL n1=new CSLL();
+
+		n1.insertAtTail(20);
+		n1.insertAtHead(10);
+		n1.insertAtTail(30);
+		
+		System.out.println(n1.search(20));
+		n1.traverse();
+
+
+	}
+}
