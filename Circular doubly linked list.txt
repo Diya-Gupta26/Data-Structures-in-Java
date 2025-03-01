@@ -1,0 +1,154 @@
+class Node {
+	int value;
+	Node next,prev;
+
+	Node(int num) {
+		value=num;
+		next=prev=null;
+	}
+
+}
+
+class CDLL {
+	Node head,tail;
+
+	CDLL() {
+		head=tail=null;
+	}
+
+
+	void insertAtTail(int num) {
+		Node n1=new Node(num);
+
+		if(head==null) {
+			head=tail=n1;
+		}
+
+		else {
+			tail.next=n1;
+			n1.prev=tail;
+			tail=n1;
+		}
+
+		head.prev=tail;
+		tail.next=head;
+
+	}
+	void insertAtHead(int num)
+	{
+		Node n1=new Node(num);
+
+		if(head==null)
+		{
+			head=tail=n1;
+		}
+		else {
+			n1.next=head;
+			head.prev=n1;
+			head=n1;
+		}
+		head.prev=tail;
+		tail.next=head;
+
+	}
+
+	void deleteAtHead() {
+		if(head==null)
+			return;
+
+		else if(head==tail) {
+			head=tail=null;
+		}
+		else
+		{
+			head=head.next;
+			head.prev=null;
+		}
+		head.prev=tail;
+		tail.next=head;
+	}
+
+	void deleteAtTail() {
+		Node temp=head;
+
+		if(head==null)
+			return;
+
+		else if(head==tail) {
+			head=tail=null;
+		}
+
+		else {
+			while(temp.next!=tail) {
+				temp=temp.next;
+			}
+			temp.next=head;
+			tail=temp;
+		}
+		head.prev=tail;
+		tail.next=head;
+	}
+
+	void traverse() {
+		Node temp=head;
+
+		if(head==null)
+			return;
+
+		else {
+			while(temp.next!=head) {
+				System.out.println(temp.value);
+				temp=temp.next;
+			}
+			System.out.println(temp.value);
+		}
+	}
+	void reverse() {
+		Node temp=tail;
+
+		if(head==null)
+			return;
+		else {
+           while(temp.prev!=tail){     
+               System.out.println(temp.value);
+			   temp=temp.prev;
+           }
+           System.out.println(temp.value);
+		}
+}
+    boolean search(int num){
+        Node temp=head;
+        
+        	if(head==null)
+			return false;
+			
+			 while(temp.next!=head)
+			 {
+			        if(temp.value==num)
+			        return true;
+			        temp=temp.next;
+			    
+			}
+			return false;
+        }
+}
+
+	public class Main
+	{
+		public static void main(String[] args) {
+			CDLL l1=new CDLL();
+			l1.insertAtTail(10);
+			
+			l1.insertAtTail(20);
+			l1.insertAtTail(30);
+			l1.insertAtTail(40);
+			l1.insertAtHead(5);
+		
+			l1.reverse();
+			System.out.println("and");
+			l1.traverse();
+		
+		
+			System.out.println(l1.search(10));
+		}
+	}
