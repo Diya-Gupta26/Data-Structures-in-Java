@@ -1,0 +1,114 @@
+class circularQ {
+	int front;
+	int rear;
+	int size;
+	int array[];
+
+	circularQ(int num)
+	{
+		front=rear=-1;
+		size=num;
+		array=new int[num];
+	}
+
+	boolean isEmpty() {
+		if(front==-1)
+			return true;
+
+		return false;
+	}
+
+	boolean isFull() {
+		if((rear+1)%size==front)
+			return true;
+
+		return false;
+	}
+
+	int frontVal() {
+		if(front==-1)
+			return -1;
+
+		return array[front];
+	}
+
+	int rearVal() {
+		if(front==-1)
+			return -1;
+
+		return array[rear];
+	}
+
+	void enqueue(int num) {
+		if(isFull())
+			return;
+
+		else if (front==-1)
+		{
+			front=(front+1)%num;
+		}
+
+		rear=(rear+1)%num;
+		array[rear]=num;
+	}
+
+	void dequeue() {
+		if(front==-1)
+			return;
+
+		else if(front==rear)
+		{
+			front=rear=-1;
+		}
+
+		else
+		{
+			front=(front+1)%size;
+		}
+
+	}
+
+	void traverse()
+	{
+		if(front==-1)
+			return;
+
+
+		for(int i=front; i!=rear; i=(i+1)%size)
+		{
+			System.out.println(array[i]);
+		}
+		System.out.println(array[rear]);
+	}
+
+	boolean search(int num) {
+
+		if(front==-1)
+			return false;
+
+		for(int i=front; i!=rear; i=(i+1)%size)
+		{
+			if(array[i]==num) {
+				return true;
+			}
+			
+			}
+		return false;
+	}
+}
+
+
+public class Main
+{
+	public static void main(String[] args) {
+		circularQ q1=new circularQ(5);
+		q1.enqueue(10);
+		q1.enqueue(20);
+		q1.enqueue(30);
+
+		q1.dequeue();
+		q1.traverse();
+		System.out.println(q1.search(30));
+
+	}
+}
