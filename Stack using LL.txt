@@ -1,0 +1,108 @@
+/******************************************************************************
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, OCaml, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+*******************************************************************************/
+class Node {
+	int value;
+	Node next;
+
+	Node(int num)
+	{
+		value=num;
+		next=null;
+	}
+}
+
+class stack
+{
+	Node top;
+
+	stack()
+	{
+		top=null;
+
+	}
+	boolean isEmpty() {
+		return top==null;
+	}
+
+	int peek()
+	{
+
+		if (top==null)
+			return -1;
+
+		return top.value;
+	}
+
+	void push(int num)
+	{
+		Node n1=new Node(num);
+
+		n1.next=top;
+		top=n1;
+
+	}
+
+	void pop() {
+		Node temp=top;
+
+		if(isEmpty())
+			return;
+
+		top=top.next;
+
+	}
+
+	void traverse() {
+		Node temp=top;
+		if(top==null)
+			return;
+
+		while(temp!=null) {
+			System.out.println(temp.value);
+			temp=temp.next;
+		}
+	}
+	void reverse(){
+	    
+	}
+
+	boolean search(int num) {
+		Node temp=top;
+
+		if(isEmpty())
+			return top==null;
+
+		while(temp!=null) {
+			if(temp.value==num)
+				return true;
+			temp=temp.next;
+		}
+		return false;
+	}
+	
+	
+
+}
+
+
+public class Main
+{
+	public static void main(String[] args) {
+		stack s1=new stack();
+		s1.push(10);
+		s1.push(20);
+		s1.push(30);
+		s1.pop();
+		System.out.println(s1.peek());
+        System.out.println(s1.search(10));
+		s1.traverse();
+		
+
+	}
+}
