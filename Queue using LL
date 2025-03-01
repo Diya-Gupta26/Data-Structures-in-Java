@@ -1,0 +1,104 @@
+class Node {
+	int value;
+	Node next;
+
+	Node(int num) {
+		value=num;
+		next=null;
+	}
+}
+
+class queue {
+	Node front,rear;
+
+	queue(int num) {
+		front=rear=null;
+	}
+
+
+	boolean isEmpty() {
+			return front==null;
+	}
+
+	void enqueue(int num) {
+		Node n1=new Node(num);
+		if(front==null)
+		{
+			front=rear=n1;
+		}
+
+		else {
+			rear.next=n1;
+			rear=n1;
+		}
+	}
+	
+    void dequeue(){
+        if(front==null){
+            return;
+        }
+        
+        front=front.next;
+        front=null;
+    }
+    
+    void frontValue(){
+        if(front==null)
+        return;
+        
+        else{
+            System.out.println(front.value);
+        }
+    }
+    
+    int rearValue(){
+        if(front==null)
+        return -1;
+        
+        else{
+            System.out.println(rear.value);
+        }
+        return -1;
+    }
+    
+    void traverse(){              //doubt
+        if(front==null)
+        return;
+        
+        Node temp=front;
+        
+        while(temp.next!=null){
+            System.out.println(temp.value);
+            temp=temp.next;
+        }
+        System.out.println(rear.value);
+    }
+    // void reverse(){
+        
+    // }
+    
+   boolean search(int num){
+       Node temp=new Node(num);
+       if(front==null)
+       return false;
+       
+       while(temp.next!=null){
+           if(temp.value==num)
+           return true;
+       }
+       return false;
+   }
+
+}
+public class Main
+{
+	public static void main(String[] args) {
+	queue q1=new queue(5);
+	q1.enqueue(10);
+	q1.enqueue(20);
+	q1.enqueue(30);
+	q1.dequeue();
+	q1.traverse();
+//System.out.println(q1.search(20));
+	}
+}
