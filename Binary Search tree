@@ -1,0 +1,125 @@
+	Node left;
+	Node right;
+	int value;
+
+	Node(int num) {
+		left=right=null;
+		value=num;
+	}
+}
+
+class bst {
+	Node root;
+
+
+	void insert(int num) {
+
+		Node n1=new Node(num);
+
+		if(root==null)
+			root=n1;
+
+		else {
+			Node temp=root;
+			while(true) {
+				if(num<temp.value) {  //left
+					//empty
+					if(temp.left==null) {
+						temp.left=n1;
+						return;
+					}
+					//not empty
+					else {
+						temp=temp.left;
+					}
+				}
+				//right
+				else {
+					if(temp.right==null) {
+						temp.right=n1;
+						return;
+					}
+					else {
+						temp=temp.right;
+					}
+
+				}
+			}
+		}
+	}
+	void inorder(Node n1)
+	{
+
+		if(n1==null)
+		return ;
+		inorder(n1.left);
+		System.out.println(n1.value);
+		inorder(n1.right);
+	}
+	void postorder(Node n1)
+	{
+		if(n1 == null) return;
+
+		postorder(n1.left);
+		postorder(n1.right);
+		System.out.println(n1.value);
+	}
+	void preorder(Node n1)
+	{
+		if(n1 == null) 
+		return;
+		System.out.println(n1.value);
+		preorder(n1.left);
+		preorder(n1.right);
+
+	}
+	
+	boolean search(int num){
+	    if(n1==null)
+	    return true;
+	    
+	    Node temp=root;
+	    while(true){
+	        if(temp.value==num)
+             return true;
+             
+            else{
+               temp=temp.left;
+               
+               if(temp.value==num)
+               return true;
+               
+               else{
+                   temp=temp.right;
+                   if(temp.value==num)
+                   return true;
+               }
+               
+               return false;
+            }
+          }
+	    }
+	}
+
+
+
+public class Main
+{
+	public static void main(String[] args) {
+		bst b1=new bst();
+		b1.insert(20);
+		b1.insert(10);
+		b1.insert(30);
+		b1.insert(8);
+		b1.insert(12);
+		b1.insert(26);
+		b1.insert(32);
+		b1.insert(7);
+		b1.insert(9);
+		System.out.println(b1.search(20));
+		//	b1.inorder(b1.root);
+	//	b1.postorder(b1.root);
+		b1.preorder(b1.root);
+	}
+}
+
