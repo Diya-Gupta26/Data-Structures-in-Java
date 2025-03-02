@@ -1,0 +1,170 @@
+class Node {
+	Node left;
+	Node right;
+	int value;
+
+	Node(int num) {
+		left=right=null;
+		value=num;
+	}
+}
+
+class bst {
+	Node root;
+
+	//recursion
+	Node insert_with_recursion(Node n1,int num) {                //to do:
+	                                                              //remove duplicacy
+
+		if(n1==null)
+			return new Node(num);
+
+		else if(num < n1.value)
+			n1.left=insert_with_recursion(n1.left,num);
+
+		else {
+			n1.right=insert_with_recursion(n1.right,num);
+		}
+
+		return n1;
+
+	}
+	void inorder(Node n1) {
+		if(n1==null)
+			return;
+
+		//left root right
+		inorder(n1.left);
+		System.out.println(n1.value);
+		inorder(n1.right);
+	}
+
+	void preorder(Node n1) {
+		if(n1==null)
+			return;
+		//root left right
+		System.out.println(n1.value);
+		preorder(n1.left);
+		preorder(n1.right);
+
+	}
+
+	void postorder(Node n1) {
+		if(n1==null)
+			return;
+
+		//left right root
+		postorder(n1.left);
+		System.out.println(n1.value);
+		postorder(n1.right);
+
+	}
+
+
+	// boolean search(Node n1,int num){
+	//     if(n1==null)
+	//     return false;
+
+	//     else if(n1.value==num)
+	//     return true;
+
+	//     boolean left=search(n1.left,num);
+	//     boolean right=search(n1.right,num);
+
+	//     return left || right;
+	// }
+
+	boolean search(Node n1,int num) {
+		if(n1==null)
+			return false;
+
+		else if(n1.value==num)
+			return true;
+
+		else if(n1.value<num)
+			return search(n1.left,num);
+
+		else {
+			return search(n1.right,num);
+		}
+	}
+	
+	Node rightmin(Node n1)
+	{
+	    if(n1.left!=null)
+	    return rightmin(n1.left);
+	    
+	    else{
+	        return n1;
+	    }
+	}
+	
+	Node leftmax(Node n1){
+	    if(n1.right!=null)
+	    return leftmax(n1.right);
+	    
+	    else{
+	        return n1;
+	    }
+	}
+
+	Node delete(Node n1,int num) {
+		if(n1==null)
+			return null;
+         //found
+		else if(n1.value==num) {
+			if(n1.left==null && n1.right==null)         //zero child
+				return null;
+
+			else if(n1.left!=null || n1.right!=null)    //one child
+				if(n1.left!=null)                      
+				return n1.left;
+
+				else {
+					return n1.right;
+				}
+				
+			else {                                      //2 child
+                 Node a1=leftmax(n1.left);
+                 delete(n1,a1.value);
+                 n1.value=a1.value;
+			}
+			
+
+		}
+
+		else if(n1.value<num)
+			n1.right=delete(n1.right,num);
+
+		else {
+			n1.left=delete(n1.left,num);
+		}
+		return n1;
+
+	}
+
+}
+public class Main
+{
+	public static void main(String[] args) {
+		bst t1=new bst();
+		//	System.out.println(t1.root=t1.insert_with_recursion(t1.root,10)); //address
+		t1.root=t1.insert_with_recursion(t1.root,45);
+		t1.root=t1.insert_with_recursion(t1.root,15);
+		t1.root=t1.insert_with_recursion(t1.root,79);
+		t1.root=t1.insert_with_recursion(t1.root,10);
+		t1.root=t1.insert_with_recursion(t1.root,20);
+		t1.root=t1.insert_with_recursion(t1.root,55);
+		t1.root=t1.insert_with_recursion(t1.root,90);
+		t1.root=t1.insert_with_recursion(t1.root,12);
+		t1.root=t1.insert_with_recursion(t1.root,50);
+		//System.out.println(t1.root.value);       //value
+		//System.out.println(t1.search(t1.root,30));
+		//t1.inorder(t1.root);
+		//System.out.println(t1.search(t1.root,10));
+		t1.root=t1.delete(t1.root,15);
+		t1.preorder(t1.root);
+
+	}
+}
+//
