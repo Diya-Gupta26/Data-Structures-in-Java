@@ -1,0 +1,122 @@
+class Node{
+    int value;
+    Node left,right;
+    
+    Node(int num){
+        value=num;
+        left=right=null;
+    }
+    }
+class avl{
+    Node root;
+    
+    int heightOfNode(Node node){
+        if(node==null)
+        return -1;
+        
+        else{
+            return 1+Math.max(heightOfNode(node.left),heightOfNode(node.right));
+        }    
+        
+    }
+    
+    int balanceFactor(Node node){
+        if(node==null)
+        return 0;
+        
+        int left=node.left!=null? 1+heightOfNode(node.left):0;
+        int right=node.right!=null? 1+heightOfNode(node.right):0;
+        
+        return left-right;
+    }
+    
+    Node insert(Node node,int num){
+        if(node==null)
+        return new Node(num);
+        
+        else if(num<node.value){
+            node.left=insert(node.left,num);
+        }
+        else{
+            node.right=insert(node.right,num);
+        }
+        
+        int bal=balanceFactor(node);
+        if (bal>1){
+            return rightRotate(node);
+        }
+        else if(bal<1){
+            return leftRotate(node);
+        }
+        else{
+            return node;
+        }
+    }
+        
+        Node leftRotate(Node node){
+            Node x=node;
+            Node y=x.right;
+            Node alp=y.left;
+            
+            y.left=x;
+            x.right=alp;
+                
+            return y;
+        }
+        
+        Node rightRotate(Node node){
+            Node x=node;
+            Node y=x.left;
+            Node alp=y.right;
+            
+            y.right=x;
+            x.left=alp;
+            
+            return y;
+        }
+        
+        void preorder(Node node){
+            if(node==null)
+            return;
+            
+            System.out.println(node.value);
+            preorder(node.left);
+            preorder(node.right);
+        }
+        
+        void inorder(Node node){
+            if(node==null)
+            return;
+            
+            
+            inorder(node.left);
+            System.out.println(node.value);
+            inorder(node.right);
+        }
+        
+        void postorder(Node node){
+            if(node==null)
+            return;
+            
+            
+            postorder(node.left);
+            postorder(node.right);
+            System.out.println(node.value);
+        }
+        
+}
+public class Main
+{
+	public static void main(String[] args) {
+	avl a1=new avl();
+	a1.root=a1.insert(a1.root,50);
+	a1.root=a1.insert(a1.root,45);
+	a1.root=a1.insert(a1.root,40);
+	//a1.root=a1.insert(a1.root,35);
+	
+//	a1.inorder(a1.root);
+ 	a1.postorder(a1.root);
+// 	a1.preorder(a1.root);
+	    
+	}
+}
