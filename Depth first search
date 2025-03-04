@@ -1,0 +1,58 @@
+import java.util.ArrayList;
+import java.util.*;
+
+class graph{
+    int vertex;
+    ArrayList<ArrayList<Integer> >al;
+    
+    graph(int num){
+        vertex=num;
+        al=new ArrayList<>();
+        
+        for(int i=0;i<vertex;i++)
+        al.add(new ArrayList<Integer> ());
+    }
+    
+    void addEdge(int src,int destn){
+        al.get(src).add(destn);
+        al.get(destn).add(src);
+    }
+    
+    void printAllNeighbours(){
+        for(int i=0;i<al.get(i).size();i++)
+        {
+            for(int j=0;j<al.get(i).get(j);j++);
+            System.out.println();        
+            
+        }
+    }
+    
+    void DFS(int start,boolean isVisited[]){
+        System.out.println(start);
+        isVisited[start]=true;
+        
+        for(int i=0;i<al.get(start).size();i++)
+        {
+            int value= al.get(start).get(i);
+            
+            if(!isVisited[value])
+            DFS(value,isVisited);    
+        }
+    }
+}
+
+public class Main
+{
+	public static void main(String[] args) {
+		graph g1= new graph(5);
+		
+		g1.addEdge(0,1);
+		g1.addEdge(0,4);
+		g1.addEdge(1,4);
+		g1.addEdge(1,3);
+		g1.addEdge(1,2);
+		g1.addEdge(2,3);
+		g1.addEdge(3,4);
+		g1.DFS(0,new boolean[5]);
+	}
+}
