@@ -1,0 +1,43 @@
+public class Main
+{
+	static void quickSort(int array[],int start,int end) {
+		if(start<end)
+		{
+			int pi= pivotIndex(array,start,end);
+			quickSort(array,start,pi-1);  //LEFT PART
+			quickSort(array,pi+1,end);  //RIGHT PART
+		}
+	}
+	static int pivotIndex(int array[],int start,int end)
+	{
+		int pivot=array[end];   //taking end value from array as pivot
+		
+		int j=start-1;
+		
+		for(int i=start; i<end; i++) {
+			if(array[i]<pivot)
+			{
+				j++;
+
+				int temp=array[i];            //swap
+				array[i]=array[j];
+				array[j]=temp;
+			}
+	   }
+		int temp=array[j+1];            //swap
+			array[j+1]=array[end];
+			array[end]=temp;
+		    return j+1;
+	}
+
+
+	public static void main(String[] args) {
+
+		int array[] = {2,8,11,10,13,6,5};
+
+		quickSort(array,0,6);
+
+		for(int x: array)
+			System.out.print(x+ " ");
+	}
+}
