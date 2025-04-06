@@ -15,7 +15,7 @@ class avl{
         return -1;
         
         else{
-            return 1+Math.max(heightOfNode(node.left),heightOfNode(node.right));
+            return 1+Math.max(heightOfNode(node.left),heightOfNode(node.right));  
         }    
         
     }
@@ -24,7 +24,7 @@ class avl{
         if(node==null)
         return 0;
         
-        int left=node.left!=null? 1+heightOfNode(node.left):0;
+        int left=node.left!=null? 1+heightOfNode(node.left):0;      //why?
         int right=node.right!=null? 1+heightOfNode(node.right):0;
         
         return left-right;
